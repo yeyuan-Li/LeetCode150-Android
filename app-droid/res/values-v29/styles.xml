@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Android 10+ 在系统深色模式下会强制给 WebView 反色，
+      会把应用自己那套深浅主题配色彻底搞乱，这里显式关掉。
+    -->
+    <style name="AppTheme" parent="@android:style/Theme.DeviceDefault.NoActionBar">
+        <item name="android:windowBackground">@color/ic_launcher_background</item>
+        <item name="android:colorBackground">@color/ic_launcher_background</item>
+        <item name="android:forceDarkAllowed">false</item>
+    </style>
+</resources>

@@ -1,0 +1,9 @@
+# 保证跨平台检出后脚本仍是 LF，避免 bash 因 CRLF 报错
+*.sh    text eol=lf
+*.py    text eol=lf
+*.js    text eol=lf
+*.java  text eol=lf
+*.json  text eol=lf
+*.md    text eol=lf
+*.html  text eol=lf
+*.css   text eol=lf

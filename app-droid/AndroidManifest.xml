@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  LeetCode 150 打卡 —— 应用清单
+
+  **不申请 android.permission.INTERNET**：应用没有任何联网能力。
+  题目链接通过系统浏览器打开，数据备份通过系统文件选择器（SAF）读写本地文件，
+  两者都是「交给系统去办」，本应用自身不发一个网络包。
+  这是「飞行模式全功能可用」的实现基础。
+
+  备份为什么不需要存储权限：
+  SAF（ACTION_CREATE_DOCUMENT / ACTION_OPEN_DOCUMENT）由系统 UI 代选文件并授权，
+  应用只拿到那一个文件的临时读写句柄，所以不用 WRITE_EXTERNAL_STORAGE。
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lc150.tracker"
+    android:versionCode="5"
+    android:versionName="1.2.1">
+
+    <uses-sdk android:minSdkVersion="24" android:targetSdkVersion="34" />
+
+    <!-- 仅用于自评、完成时的轻震动反馈 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="false"
+        android:hardwareAccelerated="true"
+        android:usesCleartextTraffic="false"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name="com.lc150.tracker.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboardHidden|uiMode|density"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
