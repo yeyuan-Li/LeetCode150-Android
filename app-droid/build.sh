@@ -25,12 +25,23 @@ set -e
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
 
-SDK="${ANDROID_SDK_ROOT:-D:/DEVELOP/Android/Sdk}"
+# 可选：本地 build.env 里覆盖 SDK / NODE / PY 路径（该文件不入库）
+[ -f "$HERE/build.env" ] && . "$HERE/build.env"
+
+SDK="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-}}"
+if [ -z "$SDK" ]; then
+  for c in "$HOME/AppData/Local/Android/Sdk" "/c/Android/Sdk" "$HOME/Library/Android/sdk" "/usr/lib/android-sdk"; do
+    [ -d "$c" ] && SDK="$c" && break
+  done
+fi
+[ -n "$SDK" ] || { echo "✗ 未找到 Android SDK：请设置 ANDROID_SDK_ROOT，或写进 app-droid/build.env"; exit 1; }
 BT="$SDK/build-tools/36.0.0"
 PLATFORM="$SDK/platforms/android-34/android.jar"
 
-NODE="${NODE_BIN:-C:/Users/lipengxin/.workbuddy/binaries/node/versions/22.22.2-6/node.exe}"
-PY="${PYTHON_BIN:-C:/Users/lipengxin/.workbuddy/binaries/python/versions/3.13.12/python.exe}"
+NODE="${NODE_BIN:-$(command -v node || true)}"
+PY="${PYTHON_BIN:-$(command -v python || command -v python3 || true)}"
+[ -n "$NODE" ] || { echo "✗ 未找到 node：请设置 NODE_BIN，或写进 app-droid/build.env"; exit 1; }
+[ -n "$PY" ] || { echo "✗ 未找到 python：请设置 PYTHON_BIN，或写进 app-droid/build.env"; exit 1; }
 
 # 无中文的临时构建目录
 WORK="$(cygpath -m "${TMPDIR:-/tmp}")/lc150-build"

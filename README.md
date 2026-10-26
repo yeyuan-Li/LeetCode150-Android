@@ -1,17 +1,26 @@
 # LeetCode 150 刷题打卡 · Android 版
 
-个人自用的 LeetCode Top Interview 150 刷题与复习管理工具，Android 原生壳 + WebView 前端，
-**纯本地、零联网、零权限**（只申请震动）。装到手机上点「打开题目」会直接跳到浏览器里的
-leetcode.cn 题目页，不用再手动复制链接。
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-> 微信小程序版在另一处（`D:\DEVELOP\微信web开发者工具\workspace`），与本目录同源：
-> `utils/` 与 `data/` 是两边共用的业务逻辑，APK 构建时会把它们打包成 `bundle.js`。
+一个**纯本地**的 LeetCode Top Interview 150 刷题与复习管理工具：150 题按 8 个阶段重排，
+「今日」自动出 3 题、完成时做「三档自评」并按 D+1/D+3/D+7 自动排复习、阶段独立率 ≥80% 才解锁下一阶段。
+Android 原生壳 + WebView 前端，**零联网、零权限**（仅震动），APK 约 80 KB。
+
+**直接使用**：到 [Releases](../../releases) 下载最新 `lc150-tracker.apk`，安装即用（Android 7.0+），
+点「打开题目」会跳到系统浏览器里的 leetcode.cn 题目页。
+
+| 今日 | 题库 | 进度 |
+| --- | --- | --- |
+| ![今日](app-droid/build/shots/tab-4-今日.png) | ![题库](app-droid/build/shots/tab-1-题库.png) | ![进度](app-droid/build/shots/tab-2-进度.png) |
+
+> `utils/` 与 `data/` 是业务逻辑的唯一来源（WebView 前端与微信小程序版共用），
+> APK 构建时由 `tools/bundle.js` 打包成 `bundle.js`。
 
 ---
 
 ## 一、安装
 
-**安装包：本目录下的 `lc150-tracker.apk`**（约 80 KB，`app-droid/out/` 里是同一份）
+**安装包：从 [Releases](../../releases) 下载 `lc150-tracker.apk`**（约 80 KB，自签名，未上架应用商店）
 
 1. 把 APK 传到手机（数据线 / 微信文件传输助手 / 网盘都行）
 2. 点击安装，系统提示「未知来源」时允许（这是自签名包，没有上架应用商店）
@@ -22,7 +31,7 @@ leetcode.cn 题目页，不用再手动复制链接。
 安装后点底部四个 tab 切换「今日 / 题库 / 进度 / 我的」，进题库点任意一题进详情，
 详情页的「打开题目」会拉起系统浏览器。飞行模式下六个页面全部可用。
 
-**升级**：直接覆盖安装即可，数据不会丢（同一个签名密钥）。
+**升级**：下载新版 APK 直接覆盖安装即可，数据不会丢（同一个签名密钥）。
 **卸载**：`localStorage` 会随卸载清除，重要记录先在「我的 → 导出数据 → 保存为文件」备份。
 
 ---
@@ -64,13 +73,9 @@ LeetCode150-Android/
     └── verify-backup.js           40 项备份/恢复断言
 ```
 
-`utils/`、`data/`、`tests/` 是从小程序工程复制过来的同源副本，APK 构建时
+`utils/`、`data/`、`tests/` 与微信小程序版同源，APK 构建时
 `tools/bundle.js` 会从 `../utils` 和 `../data` 读取并打包。改了小程序侧的逻辑后，
-用一行命令同步过来即可（`D:\Self-Softcase` 与 `D:\DEVELOP` 同盘，直接覆盖）：
-
-```bash
-cp -r "D:/DEVELOP/微信web开发者工具/workspace/utils" "D:/DEVELOP/微信web开发者工具/workspace/data" .
-```
+把对应文件复制回本目录即可。
 
 ---
 
@@ -83,6 +88,9 @@ cp -r "D:/DEVELOP/微信web开发者工具/workspace/utils" "D:/DEVELOP/微信we
 cd app-droid
 bash build.sh
 ```
+
+工具路径按这个优先级找：环境变量 `ANDROID_SDK_ROOT` / `NODE_BIN` / `PYTHON_BIN`
+→ 本地文件 `app-droid/build.env`（已 gitignore，适合固定本机版本）→ `PATH` / 常见安装位置。
 
 产物写到 `app-droid/out/lc150-tracker.apk`，同时把新包复制一份到本目录根下。
 

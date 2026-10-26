@@ -17,9 +17,10 @@ app-droid/build/*.log
 app-droid/assets/www/_*.html
 
 # ─────────────────────────────────────────────
-# 本地环境
+# 本地环境（含本机工具路径，换机器会不一样）
 # ─────────────────────────────────────────────
 local.properties
+app-droid/build.env
 *.bak
 *.tmp
 
