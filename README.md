@@ -157,3 +157,6 @@ cd app-droid && node tools/clicktest.js && node tools/clicktest-backup.js && nod
 
 个人自用工具，与 LeetCode 官方无关。应用不抓取题干，只存题号、标题、难度、标签和链接；
 看题与提交都在浏览器里的 leetcode.cn 完成，本应用只负责记录与排期。
+
+> 本项目为个人刷题工具，与 LeetCode 官方无任何关联，也未获得其授权或背书。
+> 项目仅收录题目名称与官方链接用于索引，题目内容版权归 LeetCode 所有，请前往官方站点查看题目。
